@@ -1,12 +1,47 @@
-# Tattoo Studio Hub – v6 (theme + layout)
+# Tattoo Studio Hub (Full baseline build)
 
-Changes in this bundle:
+This is a complete, working PWA tailored for mobile:
 
-- Replaced orange accents with an icy blue palette.
-- Buttons restyled to match the cooler theme.
-- Background gets subtle gradients and glows instead of a flat color.
-- Cards now have overflow hidden and a soft glow.
-- Form inputs slightly smaller; important fields use `.full-width` so 2-column layouts don't overlap.
-- Two-column form layout only activates from 768px width so most phones stay single-column.
+- Home:
+  - Next upcoming session
+  - Auto follow-ups (1 week / 1 month) with list + next upcoming
+  - Message generator
+  - Tasks with checkboxes (saved)
+  - 4-idea flash generator
+  - Quick income/expense inputs
+  - Focus timer
 
-Drop these into your existing repo (overwrite the old files), commit, and GitHub Pages will update your live site.
+- Booking:
+  - Create / edit / delete sessions
+  - "What's the tattoo?" field
+  - Upcoming sessions list
+  - Monthly calendar with highlighted days and day details
+
+- Clients:
+  - Auto-built from sessions
+  - Search and group filter
+  - Client groups (create)
+  - Client detail with last session, spend total, notes, and session history
+
+- Inspo:
+  - Idea paths with name/tier/idea
+  - Generator per tier
+  - Search, filter, edit, delete
+
+- Social:
+  - New post plans (platform/date/concept/caption/hashtags/notes)
+  - Caption/hashtag helpers
+  - Planned posts list with last summary
+  - Social calendar
+  - Social inspo generator and pinned ideas
+
+- Finance:
+  - Income and expenses with search and delete
+  - All stored in localStorage
+
+To use with GitHub Pages:
+
+1. Create a repo.
+2. Upload all files in this folder.
+3. Enable GitHub Pages on the repo (Pages → Source: main, root).
+4. Open the site on your phone and "Add to Home Screen" to install as a PWA.

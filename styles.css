@@ -1,19 +1,15 @@
-
 :root {
   --bg: #020617;
-  --bg-elevated: rgba(15, 23, 42, 0.98);
-  --border-subtle: #1f2937;
   --text-main: #e5e7eb;
   --text-muted: #9ca3af;
   --accent: #38bdf8;
   --accent-soft: #0ea5e9;
-  --accent-glow: rgba(56, 189, 248, 0.25);
-  --btn-primary: #38bdf8;
-  --btn-primary-text: #0b1120;
-  --btn-secondary-border: #4b5563;
+  --accent-purple: #6366f1;
+  --card-bg: rgba(15,23,42,0.96);
+  --border-subtle: rgba(30,64,175,0.4);
 }
 
-/* Basic reset */
+/* Reset-ish */
 *,
 *::before,
 *::after { box-sizing: border-box; }
@@ -22,22 +18,24 @@ body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at top, rgba(56, 189, 248, 0.14), transparent 55%),
-    radial-gradient(circle at bottom, rgba(15, 23, 42, 0.9), #020617);
+    radial-gradient(circle at top left, rgba(99, 102, 241, 0.38), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.28), #020617);
   color: var(--text-main);
 }
 
-/* App shell */
+/* APP SHELL */
 .app-shell {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.99));
+  background:
+    radial-gradient(circle at top, rgba(15,23,42,0.9), transparent 60%),
+    linear-gradient(145deg, rgba(15,23,42,0.98), rgba(15,23,42,0.98));
 }
 
 .app-header {
   padding: 0.75rem 1rem;
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(15, 23, 42, 0.96);
   border-bottom: 1px solid rgba(148, 163, 184, 0.25);
   display: flex;
   justify-content: space-between;
@@ -45,39 +43,41 @@ body {
   position: sticky;
   top: 0;
   z-index: 20;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
 }
 
 .app-header h1 {
   margin: 0;
-  font-size: 1.05rem;
-  letter-spacing: 0.08em;
+  font-size: 1.02rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .icon-button {
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.5);
-  background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.25), rgba(15, 23, 42, 0.95));
-  color: var(--text-main);
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.3), rgba(15,23,42,0.96));
+  color: #f9fafb;
   padding: 0.25rem 0.7rem;
 }
 
-/* Nav */
+/* NAVIGATION */
 .top-nav {
   display: none;
-  background: rgba(15, 23, 42, 0.96);
+  background: rgba(15, 23, 42, 0.97);
   padding: 0.35rem;
   position: sticky;
   top: 3rem;
   z-index: 15;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.9);
 }
 .top-nav.open {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.3rem;
-  justify-content: space-around;
+  gap: 0.35rem;
+  justify-content: space-between;
 }
 .nav-btn {
   flex: 1;
@@ -90,12 +90,13 @@ body {
 }
 .nav-btn span {
   position: relative;
-  padding-bottom: 0.08rem;
+  padding-bottom: 0.06rem;
 }
 .nav-btn.active {
   color: var(--accent-soft);
-  border-color: rgba(56, 189, 248, 0.6);
-  background: radial-gradient(circle at top, rgba(56, 189, 248, 0.16), transparent 60%);
+  border-color: rgba(56, 189, 248, 0.7);
+  background:
+    radial-gradient(circle at top, rgba(56,189,248,0.18), transparent 60%);
 }
 .nav-btn.active span::after {
   content: "";
@@ -106,16 +107,18 @@ body {
   width: 70%;
   height: 2px;
   border-radius: 999px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  background:
+    linear-gradient(90deg, transparent, var(--accent), var(--accent-purple), transparent);
 }
 
-/* Pages */
+/* MAIN LAYOUT */
 .app-main {
   flex: 1;
   padding: 0.75rem;
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
 }
+
 .page {
   display: none;
   margin-top: 0.7rem;
@@ -124,69 +127,67 @@ body {
   display: block;
 }
 
-/* Cards */
+/* CARDS */
 .card {
-  background: var(--bg-elevated);
+  background: var(--card-bg);
   border-radius: 1rem;
   padding: 0.9rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.8rem;
   border: 1px solid rgba(15, 23, 42, 0.9);
   position: relative;
   overflow: hidden;
   box-shadow:
-    0 18px 35px rgba(15, 23, 42, 0.95),
+    0 18px 40px rgba(15, 23, 42, 0.95),
     0 0 0 1px rgba(15, 23, 42, 0.9);
 }
 .card::before {
   content: "";
   position: absolute;
   inset: -40%;
-  opacity: 0.12;
+  opacity: 0.16;
   background:
-    radial-gradient(circle at top left, var(--accent-glow), transparent 55%),
-    radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.7), transparent 55%);
+    radial-gradient(circle at top left, rgba(56,189,248,0.35), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(99,102,241,0.32), transparent 55%);
   pointer-events: none;
 }
-.card > * {
-  position: relative;
-  z-index: 1;
-}
+.card > * { position: relative; z-index: 1; }
+
 .card-accent {
-  border-color: rgba(56, 189, 248, 0.8);
+  border-color: rgba(129, 140, 248, 0.9);
   box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.45),
-    0 26px 55px rgba(15, 23, 42, 0.95);
+    0 0 0 1px rgba(129,140,248,0.55),
+    0 26px 60px rgba(15, 23, 42, 0.96);
 }
 .card h2 {
-  margin: 0 0 0.5rem;
-  font-size: 1.02rem;
+  margin: 0 0 0.45rem;
+  font-size: 1.04rem;
 }
 .card h3 {
-  margin: 0.6rem 0 0.3rem;
-  font-size: 0.92rem;
+  margin: 0.5rem 0 0.25rem;
+  font-size: 0.95rem;
 }
 
-/* Text */
-.small-text { font-size: 0.85rem; }
+/* TEXT */
+.small-text { font-size: 0.86rem; }
 .muted { color: var(--text-muted); }
 
-/* Info block */
+/* INFO BLOCK */
 .info-block {
-  padding: 0.5rem 0.6rem;
+  padding: 0.55rem 0.6rem;
   border-radius: 0.7rem;
-  background: rgba(15, 23, 42, 0.96);
-  border: 1px solid rgba(15, 23, 42, 0.9);
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid rgba(30, 64, 175, 0.6);
 }
 
-/* Inputs */
+/* INPUTS & FORMS */
 input,
 select,
 textarea {
   width: 100%;
   padding: 0.45rem 0.55rem;
   border-radius: 0.6rem;
-  border: 1px solid rgba(55, 65, 81, 0.95);
-  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(51, 65, 85, 0.95);
+  background: rgba(15, 23, 42, 0.98);
   color: var(--text-main);
   font-size: 0.9rem;
 }
@@ -194,13 +195,21 @@ textarea { resize: vertical; }
 label {
   display: block;
   font-size: 0.78rem;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.3rem;
   color: var(--text-muted);
 }
 .full-width { grid-column: 1 / -1; }
 
-/* Buttons */
-button { font-family: inherit; }
+.inline-row {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+/* BUTTONS */
+button {
+  font-family: inherit;
+}
 .btn-primary,
 .btn-small,
 .btn-pill {
@@ -212,39 +221,41 @@ button { font-family: inherit; }
   transition: background 0.12s ease, transform 0.08s ease, box-shadow 0.12s ease;
 }
 .btn-primary {
-  background: radial-gradient(circle at top, var(--btn-primary), #0284c7);
-  color: var(--btn-primary-text);
-  border: 1px solid rgba(56, 189, 248, 0.75);
-  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.3);
+  background:
+    radial-gradient(circle at top, var(--accent), #0284c7);
+  color: #0b1120;
+  border: 1px solid rgba(56, 189, 248, 0.8);
+  box-shadow:
+    0 12px 30px rgba(56, 189, 248, 0.35);
 }
 .btn-small {
-  background: rgba(37, 99, 235, 0.16);
+  background: rgba(37, 99, 235, 0.2);
   color: var(--accent-soft);
-  border: 1px solid rgba(56, 189, 248, 0.5);
+  border: 1px solid rgba(56, 189, 248, 0.6);
 }
 .btn-pill {
-  background: rgba(15, 23, 42, 0.96);
+  background: rgba(15, 23, 42, 0.98);
   color: var(--text-main);
-  border: 1px solid rgba(148, 163, 184, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.7);
 }
 button.secondary {
   background: transparent;
   color: var(--text-main);
-  border: 1px solid var(--btn-secondary-border);
+  border: 1px solid rgba(75, 85, 99, 0.9);
 }
 button:active {
   transform: translateY(1px) scale(0.99);
   box-shadow: none;
 }
 
-/* Lists */
+/* LISTS */
 .list-simple {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 .list-simple li {
-  padding: 0.4rem 0.1rem;
+  padding: 0.38rem 0.1rem;
   border-bottom: 1px solid rgba(15, 23, 42, 0.9);
   display: flex;
   justify-content: space-between;
@@ -259,7 +270,7 @@ button:active {
   margin-bottom: 0.5rem;
 }
 
-/* Timer */
+/* TIMER */
 .timer-display {
   font-size: 1.7rem;
   text-align: center;
@@ -273,16 +284,11 @@ button:active {
   justify-content: space-between;
 }
 
-/* Grids */
-.todo-input-row {
-  display: flex;
-  gap: 0.4rem;
-  margin-bottom: 0.4rem;
-}
+/* GRIDS */
 .form-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 0.5rem;
+  gap: 0.55rem;
   align-items: flex-start;
 }
 .quick-finance-grid {
@@ -303,8 +309,11 @@ button:active {
   align-items: center;
   gap: 0.4rem;
 }
+.client-meta > div {
+  margin-bottom: 0.25rem;
+}
 
-/* Calendar */
+/* CALENDARS */
 .calendar-header {
   display: flex;
   justify-content: space-between;
@@ -323,42 +332,38 @@ button:active {
   text-align: center;
   padding: 0.25rem 0.1rem;
   border-radius: 0.4rem;
-  min-height: 1.5rem;
+  min-height: 1.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.calendar-day {
-  border: 1px solid rgba(30, 64, 175, 0.35);
-  background: rgba(15, 23, 42, 0.98);
 }
 .calendar-day-label {
   color: var(--text-muted);
   font-weight: 600;
   border: none;
+  background: transparent;
 }
-.calendar-day-empty { opacity: 0.25; }
-
+.calendar-day-empty {
+  opacity: 0.25;
+}
+.calendar-day {
+  border: 1px solid rgba(30, 64, 175, 0.4);
+  background: rgba(15, 23, 42, 0.98);
+}
 .calendar-day.has-session {
-  background: radial-gradient(circle at top, rgba(56, 189, 248, 0.25), rgba(15, 23, 42, 0.98));
-  border-color: rgba(56, 189, 248, 0.9);
+  background:
+    radial-gradient(circle at top, rgba(56,189,248,0.28), rgba(15,23,42,0.98));
+  border-color: rgba(56, 189, 248, 0.95);
 }
-.calendar-day.has-social-instagram {
-  background: radial-gradient(circle at top, rgba(236, 72, 153, 0.3), rgba(15, 23, 42, 0.98));
-  border-color: rgba(236, 72, 153, 0.8);
-}
-.calendar-day.has-social-tiktok {
-  background: radial-gradient(circle at top, rgba(45, 212, 191, 0.3), rgba(15, 23, 42, 0.98));
-  border-color: rgba(45, 212, 191, 0.8);
-}
-.calendar-day.has-social-facebook {
-  background: radial-gradient(circle at top, rgba(59, 130, 246, 0.35), rgba(15, 23, 42, 0.98));
-  border-color: rgba(59, 130, 246, 0.8);
+.calendar-day.has-social {
+  background:
+    radial-gradient(circle at top, rgba(129,140,248,0.3), rgba(15,23,42,0.98));
+  border-color: rgba(129, 140, 248, 0.95);
 }
 
 .hidden { display: none !important; }
 
-/* Responsive tweaks */
+/* RESPONSIVE */
 @media (min-width: 768px) {
   .form-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

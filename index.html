@@ -19,7 +19,7 @@
       <button data-page="home" class="nav-btn active"><span>Home</span></button>
       <button data-page="booking" class="nav-btn"><span>Booking</span></button>
       <button data-page="clients" class="nav-btn"><span>Clients</span></button>
-      <button data-page="inspiration" class="nav-btn"><span>Inspo</span></button>
+      <button data-page="inspo" class="nav-btn"><span>Inspo</span></button>
       <button data-page="social" class="nav-btn"><span>Social</span></button>
       <button data-page="finance" class="nav-btn"><span>Finance</span></button>
     </nav>
@@ -37,7 +37,7 @@
         <section class="card">
           <h2>Follow-ups</h2>
           <p class="small-text muted">
-            Auto 1-week and 1-month check-ins after each session.
+            Auto 1-week and 1-month follow-ups after each session.
           </p>
           <ul id="contactTodayList" class="list-simple small-text"></ul>
           <div id="nextFollowupInfo" class="small-text muted"></div>
@@ -49,7 +49,7 @@
 
         <section class="card">
           <h2>Today's Tasks</h2>
-          <div class="todo-input-row">
+          <div class="inline-row">
             <input id="taskInput" type="text" placeholder="New task..." />
             <button id="addTaskBtn" class="btn-small">Add</button>
           </div>
@@ -58,14 +58,11 @@
 
         <section class="card">
           <h2>Quick Flash Ideas</h2>
-          <div class="todo-input-row">
+          <div class="inline-row">
             <input id="flashPromptInput" type="text" placeholder="Prompt for a 4-piece sheet..." />
             <button id="generateFlashBtn" class="btn-small">Generate 4 ideas</button>
           </div>
           <ul id="flashIdeasList" class="list-simple small-text"></ul>
-          <p class="small-text muted">
-            Pin a sheet to send it into the inspo vault.
-          </p>
         </section>
 
         <section class="card">
@@ -186,7 +183,7 @@
             <h2 id="clientDetailName">Client Detail</h2>
             <button id="deleteClientBtn" class="btn-small secondary">Delete client</button>
           </div>
-          <div class="small-text">
+          <div class="small-text client-meta">
             <div>
               <strong>Contact:</strong>
               <input id="clientDetailContact" type="text" />
@@ -199,7 +196,7 @@
             <div><strong>Total Spend:</strong> $<span id="clientDetailTotalSpend">0</span></div>
           </div>
 
-          <button id="saveClientMetaBtn" class="btn-small" style="margin-top:0.5rem;">
+          <button id="saveClientMetaBtn" class="btn-small">
             Save client info
           </button>
 
@@ -219,7 +216,7 @@
       </section>
 
       <!-- INSPO -->
-      <section id="page-inspiration" class="page">
+      <section id="page-inspo" class="page">
         <section class="card card-accent">
           <h2>New Idea Path</h2>
           <form id="inspoIdeaForm" class="form-grid">
@@ -241,7 +238,7 @@
               <textarea id="inspoIdeaText" rows="4"
                 placeholder="Describe the concept or generate one below."></textarea>
             </label>
-            <div class="inspo-idea-actions full-width">
+            <div class="full-width">
               <button type="button" id="generateInspoIdeaBtn" class="btn-small">
                 Generate idea
               </button>
@@ -293,17 +290,17 @@
             <label class="full-width">
               Caption
               <textarea id="socialCaption" rows="3"></textarea>
-              <div class="inspo-idea-actions">
-                <button type="button" id="generateCaptionBtn" class="btn-small">Generate caption</button>
+              <div class="inline-row">
+                <button type="button" id="generateCaptionBtn" class="btn-small">Generate</button>
                 <button type="button" id="improveCaptionBtn" class="btn-small secondary">
-                  Punch up caption
+                  Punch up
                 </button>
               </div>
             </label>
             <label class="full-width">
               Hashtags
               <textarea id="socialHashtags" rows="2" placeholder="#tattoo #blackwork ..."></textarea>
-              <div class="inspo-idea-actions">
+              <div>
                 <button type="button" id="generateHashtagsBtn" class="btn-small secondary">
                   Suggest hashtags
                 </button>
