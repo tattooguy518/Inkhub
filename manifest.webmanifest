@@ -1,0 +1,9 @@
+{
+  "name": "Tattoo Studio Hub",
+  "short_name": "StudioHub",
+  "description": "Mobile-first PWA hub for tattoo booking, clients, inspiration, social planning, and finance.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#020617"
+}

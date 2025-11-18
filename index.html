@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tattoo Studio Hub</title>
+
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#020617" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <button id="menuToggle" class="icon-button" aria-label="Toggle menu">☰</button>
+      <h1 id="pageTitle">Home</h1>
+    </header>
+
+    <nav class="top-nav" id="topNav">
+      <button data-page="home" class="nav-btn active"><span>Home</span></button>
+      <button data-page="booking" class="nav-btn"><span>Booking</span></button>
+      <button data-page="clients" class="nav-btn"><span>Clients</span></button>
+      <button data-page="inspiration" class="nav-btn"><span>Inspo</span></button>
+      <button data-page="social" class="nav-btn"><span>Social</span></button>
+      <button data-page="finance" class="nav-btn"><span>Finance</span></button>
+    </nav>
+
+    <main class="app-main">
+      <!-- Home Page -->
+      <section id="page-home" class="page active">
+        <section class="card card-accent">
+          <h2>Next Session</h2>
+          <div id="homeNextSession" class="info-block small-text">No upcoming sessions.</div>
+        </section>
+
+        <section class="card">
+          <h2>Follow-ups</h2>
+          <p class="small-text muted">
+            Shows follow-ups due today. If none, you'll see the next upcoming follow-up.
+          </p>
+          <ul id="contactTodayList" class="list-simple small-text"></ul>
+          <div id="nextFollowupInfo" class="small-text muted"></div>
+          <div class="message-gen">
+            <button id="generateMessageBtn" class="btn-small">Suggest message</button>
+            <p id="messageIdea" class="small-text"></p>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Today's Tasks</h2>
+          <div class="todo-input-row">
+            <input id="taskInput" type="text" placeholder="New task..." />
+            <button id="addTaskBtn" class="btn-small">Add</button>
+          </div>
+          <ul id="taskList" class="list-simple"></ul>
+        </section>
+
+        <section class="card">
+          <h2>Quick Flash Ideas</h2>
+          <div class="todo-input-row">
+            <input id="flashPromptInput" type="text" placeholder="Prompt for a 4-piece sheet..." />
+            <button id="generateFlashBtn" class="btn-small">Generate 4 ideas</button>
+          </div>
+          <ul id="flashIdeasList" class="list-simple small-text"></ul>
+          <p class="small-text muted">Pinned sheets are saved into the Inspo page.</p>
+        </section>
+
+        <section class="card">
+          <h2>Quick Income / Expense</h2>
+          <div class="quick-finance-grid">
+            <div>
+              <h3>Income</h3>
+              <input id="quickIncomeName" type="text" placeholder="Client or source" />
+              <input id="quickIncomeAmount" type="number" placeholder="Amount" />
+              <button id="quickIncomeSave" class="btn-small">Add income</button>
+            </div>
+            <div>
+              <h3>Expense</h3>
+              <input id="quickExpenseName" type="text" placeholder="Expense name" />
+              <input id="quickExpenseAmount" type="number" placeholder="Amount" />
+              <button id="quickExpenseSave" class="btn-small secondary">Add expense</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Focus Timer</h2>
+          <div class="timer-display" id="timerDisplay">00:00</div>
+          <div class="timer-buttons">
+            <button data-min="15" class="btn-pill">15 min</button>
+            <button data-min="25" class="btn-pill">25 min</button>
+            <button data-min="45" class="btn-pill">45 min</button>
+          </div>
+          <div class="timer-controls">
+            <button id="startTimerBtn" class="btn-small">Start</button>
+            <button id="stopTimerBtn" class="btn-small secondary">Stop</button>
+            <button id="resetTimerBtn" class="btn-small secondary">Reset</button>
+          </div>
+        </section>
+      </section>
+
+      <!-- Tattoo Booking Page -->
+      <section id="page-booking" class="page">
+        <section class="card card-accent">
+          <h2>New / Edit Tattoo Booking</h2>
+          <form id="bookingForm" class="form-grid">
+            <input type="hidden" id="editingSessionId" />
+            <label>
+              Client Name
+              <input type="text" id="bookingClientName" required />
+            </label>
+            <label>
+              Contact (phone / email)
+              <input type="text" id="bookingContact" />
+            </label>
+            <label>
+              Session Date
+              <input type="date" id="bookingDate" required />
+            </label>
+            <label>
+              Session Time
+              <input type="time" id="bookingTime" required />
+            </label>
+            <label>
+              Placement
+              <input type="text" id="bookingPlacement" placeholder="Forearm, thigh, etc." />
+            </label>
+            <label>
+              Price ($)
+              <input type="number" id="bookingPrice" min="0" step="1" />
+            </label>
+            <label>
+              Deposit ($)
+              <input type="number" id="bookingDeposit" min="0" step="1" />
+            </label>
+            <label>
+              What's the tattoo?
+              <textarea id="bookingDescription" rows="3" placeholder="Skull with ferns, witchy forearm wrap, etc."></textarea>
+            </label>
+            <label>
+              Reference Image
+              <input type="file" id="bookingImage" accept="image/*" />
+            </label>
+            <button type="submit" class="btn-primary">Save Booking</button>
+            <button type="button" id="cancelEditSessionBtn" class="btn-small secondary hidden">Cancel edit</button>
+          </form>
+          <p class="small-text muted">
+            Note: images + data are stored locally in your browser. Calendar sync uses a Google Calendar link; edits/deletes do not auto-update existing Google events.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>Upcoming Sessions</h2>
+          <div id="bookingSessionsList" class="list-cards small-text"></div>
+        </section>
+
+        <section class="card">
+          <h2>Booking Calendar</h2>
+          <div class="calendar-header">
+            <button id="calendarPrev" class="btn-small secondary">&lt;</button>
+            <div id="calendarMonthLabel"></div>
+            <button id="calendarNext" class="btn-small secondary">&gt;</button>
+          </div>
+          <div class="calendar-grid" id="bookingCalendarGrid"></div>
+          <div id="calendarDayDetails" class="small-text"></div>
+        </section>
+      </section>
+
+      <!-- Client Management Page -->
+      <section id="page-clients" class="page">
+        <section class="card">
+          <h2>Clients</h2>
+          <div class="client-controls">
+            <input id="clientSearch" type="text" placeholder="Search clients..." />
+            <select id="clientGroupFilter">
+              <option value="">All groups</option>
+            </select>
+          </div>
+          <div class="client-groups-row">
+            <input id="newClientGroupName" type="text" placeholder="New group name..." />
+            <button id="addClientGroupBtn" class="btn-small secondary">Add group</button>
+          </div>
+          <ul id="clientList" class="list-simple small-text"></ul>
+        </section>
+
+        <section class="card" id="clientDetailCard" hidden>
+          <div class="client-detail-header">
+            <h2 id="clientDetailName">Client Detail</h2>
+            <button id="deleteClientBtn" class="btn-small secondary">Delete client</button>
+          </div>
+          <div class="small-text">
+            <div>
+              <strong>Contact:</strong>
+              <input id="clientDetailContact" type="text" />
+            </div>
+            <div>
+              <strong>Group:</strong>
+              <select id="clientDetailGroup"></select>
+            </div>
+            <div><strong>Last Session:</strong> <span id="clientDetailLastSession"></span></div>
+            <div><strong>Total Spend:</strong> $<span id="clientDetailTotalSpend">0</span></div>
+          </div>
+
+          <button id="saveClientMetaBtn" class="btn-small" style="margin-top:0.5rem;">Save client info</button>
+
+          <h3>Notes about them</h3>
+          <textarea id="clientNotesThem" rows="3" placeholder="Talking points, preferences, etc."></textarea>
+
+          <h3>Session notes</h3>
+          <textarea id="clientNotesSession" rows="4" placeholder="Prep, aftercare, next-time ideas..."></textarea>
+
+          <button id="saveClientNotesBtn" class="btn-primary">Save Notes</button>
+
+          <h3>Sessions</h3>
+          <ul id="clientSessionsList" class="list-simple small-text"></ul>
+
+          <h3>Images</h3>
+          <p class="small-text muted">Includes reference images attached to bookings for this client.</p>
+          <div id="clientImagesGrid" class="inspo-grid"></div>
+        </section>
+
+        <section class="card">
+          <h2>Follow-up reminders</h2>
+          <p class="small-text muted">
+            The app can try to show browser notifications at 9am, 2pm, and 8pm while it's open.
+            Your browser / OS must allow notifications. This cannot guarantee alerts if the app is fully closed.
+          </p>
+          <button id="enableFollowupNotificationsBtn" class="btn-small">Enable reminders</button>
+        </section>
+      </section>
+
+      <!-- Drawing Inspiration Page -->
+      <section id="page-inspiration" class="page">
+        <section class="card card-accent">
+          <h2>New Idea Path</h2>
+          <form id="inspoIdeaForm" class="form-grid">
+            <input type="hidden" id="editingInspoId" />
+            <label>
+              Name
+              <input type="text" id="inspoName" placeholder="Witchy forearm set, skull tarot..." />
+            </label>
+            <label>
+              Tier
+              <select id="inspoTier">
+                <option value="flash">Flash (small / quick)</option>
+                <option value="medium">Medium concept</option>
+                <option value="full">Full detailed concept</option>
+              </select>
+            </label>
+            <label>
+              Idea
+              <textarea id="inspoIdeaText" rows="4" placeholder="Describe the concept or generate one below."></textarea>
+            </label>
+            <div class="inspo-idea-actions">
+              <button type="button" id="generateInspoIdeaBtn" class="btn-small">Generate idea</button>
+            </div>
+            <label>
+              References
+              <input type="file" id="inspoRefsInput" accept="image/*" multiple />
+            </label>
+            <button type="submit" class="btn-primary">Save idea</button>
+            <button type="button" id="cancelEditInspoBtn" class="btn-small secondary hidden">Cancel edit</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Idea Vault</h2>
+          <div class="client-controls">
+            <input id="inspoSearch" type="text" placeholder="Search ideas..." />
+            <select id="inspoTierFilter">
+              <option value="">All tiers</option>
+              <option value="flash">Flash</option>
+              <option value="medium">Medium</option>
+              <option value="full">Full</option>
+            </select>
+          </div>
+          <div id="inspoIdeasList" class="list-cards small-text"></div>
+        </section>
+      </section>
+
+      <!-- Social Media Planner Page -->
+      <section id="page-social" class="page">
+        <section class="card">
+          <h2>New Post Plan</h2>
+          <form id="socialForm" class="form-grid">
+            <input type="hidden" id="editingSocialId" />
+            <label>
+              Platform
+              <select id="socialPlatform">
+                <option value="Instagram">Instagram</option>
+                <option value="TikTok">TikTok</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+            <label>
+              Target Date
+              <input type="date" id="socialDate" />
+            </label>
+            <label>
+              Concept / Piece
+              <input type="text" id="socialConcept" placeholder="Healed sleeve, flash sheet, etc." />
+            </label>
+            <label>
+              Caption Ideas
+              <textarea id="socialCaption" rows="3"></textarea>
+              <div class="inspo-idea-actions">
+                <button type="button" id="generateCaptionBtn" class="btn-small">Generate caption</button>
+                <button type="button" id="improveCaptionBtn" class="btn-small secondary">Punch up caption</button>
+              </div>
+            </label>
+            <label>
+              Hashtag Ideas
+              <textarea id="socialHashtags" rows="2" placeholder="#tattoo #blackwork ..."></textarea>
+              <div class="inspo-idea-actions">
+                <button type="button" id="generateHashtagsBtn" class="btn-small secondary">Suggest hashtags</button>
+              </div>
+            </label>
+            <label>
+              Images for this post
+              <input type="file" id="socialImagesInput" accept="image/*" multiple />
+            </label>
+            <label>
+              Extra Notes
+              <textarea id="socialNotes" rows="2"></textarea>
+            </label>
+            <button type="submit" class="btn-primary">Save Plan</button>
+            <button type="button" id="cancelEditSocialBtn" class="btn-small secondary hidden">Cancel edit</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Planned Posts</h2>
+          <div id="lastSocialSummary" class="small-text muted"></div>
+          <div id="socialPlansList" class="list-cards small-text"></div>
+        </section>
+
+        <section class="card">
+          <h2>Social Calendar</h2>
+          <div class="calendar-header">
+            <button id="socialCalPrev" class="btn-small secondary">&lt;</button>
+            <div id="socialCalMonthLabel"></div>
+            <button id="socialCalNext" class="btn-small secondary">&gt;</button>
+          </div>
+          <div class="calendar-grid" id="socialCalendarGrid"></div>
+          <div id="socialCalendarDayDetails" class="small-text"></div>
+        </section>
+
+        <section class="card">
+          <h2>Social Content Ideas</h2>
+          <div class="client-controls">
+            <select id="socialInspoPlatform">
+              <option value="Instagram">Instagram</option>
+              <option value="TikTok">TikTok</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Other">Other</option>
+            </select>
+            <button id="generateSocialInspoBtn" class="btn-small">Generate idea</button>
+          </div>
+          <p id="socialInspoIdea" class="small-text"></p>
+          <button id="pinSocialInspoBtn" class="btn-small secondary">Pin this idea</button>
+          <h3>Pinned Ideas</h3>
+          <div id="socialInspoList" class="list-cards small-text"></div>
+        </section>
+      </section>
+
+      <!-- Finance Page -->
+      <section id="page-finance" class="page">
+        <section class="card card-accent">
+          <h2>Income</h2>
+          <form id="incomeForm" class="form-grid">
+            <label>
+              Client / Source
+              <input type="text" id="incomeName" required />
+            </label>
+            <label>
+              Date
+              <input type="date" id="incomeDate" required />
+            </label>
+            <label>
+              Amount
+              <input type="number" id="incomeAmount" min="0" step="0.01" required />
+            </label>
+            <button type="submit" class="btn-primary">Add income</button>
+          </form>
+          <div class="client-controls">
+            <input id="incomeSearch" type="text" placeholder="Search income..." />
+          </div>
+          <div id="incomeList" class="list-cards small-text"></div>
+        </section>
+
+        <section class="card">
+          <h2>Expenses</h2>
+          <form id="expenseForm" class="form-grid">
+            <label>
+              Name
+              <input type="text" id="expenseName" required />
+            </label>
+            <label>
+              Category / Tag
+              <input type="text" id="expenseTag" />
+            </label>
+            <label>
+              Date
+              <input type="date" id="expenseDate" required />
+            </label>
+            <label>
+              Amount
+              <input type="number" id="expenseAmount" min="0" step="0.01" required />
+            </label>
+            <label>
+              Receipt / Image (optional)
+              <input type="file" id="expenseImage" accept="image/*" />
+            </label>
+            <button type="submit" class="btn-primary">Add expense</button>
+          </form>
+          <div class="client-controls">
+            <input id="expenseSearch" type="text" placeholder="Search expenses..." />
+          </div>
+          <div id="expenseList" class="list-cards small-text"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
