@@ -1,400 +1,116 @@
-:root {
-  --bg-main: radial-gradient(circle at top, #0b1120 0%, #020617 40%, #000000 100%);
-  --surface: rgba(15, 23, 42, 0.95);
-  --surface-soft: rgba(15, 23, 42, 0.9);
-  --border-subtle: rgba(148, 163, 184, 0.18);
-  --accent: #38bdf8;              /* icy blue */
-  --accent-soft: rgba(56, 189, 248, 0.16);
-  --accent-strong: rgba(56, 189, 248, 0.5);
-  --text-main: #e5e7eb;
-  --text-muted: #9ca3af;
-  --radius-lg: 18px;
-  --shadow-soft: 0 20px 45px rgba(15, 23, 42, 0.9);
-  --transition-fast: 160ms ease-out;
-  --transition-med: 220ms ease-out;
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const sideNav = document.getElementById("sideNav");
+  const menuToggle = document.getElementById("menuToggle");
+  const closeNavBtn = document.getElementById("closeNav");
+  const backdrop = document.getElementById("backdrop");
+  const navItems = Array.from(document.querySelectorAll(".nav-item"));
+  const pages = Array.from(document.querySelectorAll(".page"));
+  const viewport = document.getElementById("viewport");
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+  /* ───────── Nav open / close ───────── */
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-  background: var(--bg-main);
-  color: var(--text-main);
-  overflow: hidden; /* we scroll inside the viewport/pages */
-}
-
-.app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ───────── Top bar ───────── */
-
-.top-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 56px;
-  z-index: 40;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.92));
-  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.9), 0 20px 40px rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(18px);
-}
-
-.app-title {
-  font-size: 1.05rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #e0f2fe;
-}
-
-/* ───────── Shell + viewport ───────── */
-
-.shell {
-  flex: 1;
-  margin-top: 56px; /* same as top-bar height */
-}
-
-.viewport {
-  position: relative;
-  height: calc(100vh - 56px);
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 16px;
-  overflow: hidden; /* pages are full-screen panels inside */
-}
-
-/* ───────── Pages (full-screen panels) ───────── */
-
-.page {
-  position: absolute;
-  inset: 0;
-  padding: 4px 0 16px;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(16px);
-  transition: opacity var(--transition-med), transform var(--transition-med);
-}
-
-.page.active {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(0);
-  z-index: 1;
-}
-
-.page-header {
-  padding: 0 4px 10px;
-}
-
-.page-header h2 {
-  margin: 0 0 4px;
-  font-size: 1.25rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #e0f2fe;
-}
-
-.page-subtitle {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-/* ───────── Cards ───────── */
-
-.card-grid {
-  padding: 0 2px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 12px;
-}
-
-@media (min-width: 640px) {
-  .card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  function openNav() {
+    if (!sideNav) return;
+    sideNav.classList.add("open");
+    backdrop.classList.add("visible");
   }
-}
 
-@media (min-width: 960px) {
-  .card-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  function closeNav() {
+    if (!sideNav) return;
+    sideNav.classList.remove("open");
+    backdrop.classList.remove("visible");
   }
-}
 
-.card {
-  position: relative;
-  border-radius: var(--radius-lg);
-  padding: 14px 14px 16px;
-  background: linear-gradient(145deg, var(--surface), var(--surface-soft));
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-soft);
-  overflow: hidden;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
-}
+  if (menuToggle) {
+    menuToggle.addEventListener("click", openNav);
+  }
 
-.card::before {
-  content: "";
-  position: absolute;
-  inset: -40%;
-  opacity: 0;
-  background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), transparent 55%);
-  transition: opacity var(--transition-med), transform var(--transition-med);
-  transform: translate3d(-10px, -10px, 0);
-}
+  if (closeNavBtn) {
+    closeNavBtn.addEventListener("click", closeNav);
+  }
 
-.card h3 {
-  margin: 0 0 6px;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #e0f2fe;
-}
+  if (backdrop) {
+    backdrop.addEventListener("click", closeNav);
+  }
 
-.card p {
-  margin: 0;
-  font-size: 0.88rem;
-  color: var(--text-muted);
-}
+  /* ───────── Page switching (full-screen panels) ───────── */
 
-.card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(148, 163, 184, 0.55);
-  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.95);
-  background: linear-gradient(150deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
-}
+  function setActivePage(targetId) {
+    const targetPage = document.getElementById(targetId);
+    if (!targetPage) return;
 
-.card:hover::before {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
+    // Switch active page
+    pages.forEach((page) => {
+      const isActive = page === targetPage;
+      page.classList.toggle("active", isActive);
 
-/* Glowy “primary” cards */
-.card.glow {
-  border-color: rgba(56, 189, 248, 0.4);
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.2),
-    0 18px 50px rgba(15, 23, 42, 0.95),
-    0 0 40px rgba(56, 189, 248, 0.18);
-}
+      // reset scroll for any page we activate
+      if (isActive) {
+        page.scrollTop = 0;
+      }
+    });
 
-.card.glow::before {
-  opacity: 0.35;
-}
+    // Update nav highlight
+    navItems.forEach((item) => {
+      item.classList.toggle("active", item.dataset.target === targetId);
+    });
 
-/* ───────── Icon buttons & hamburger ───────── */
+    // Extra safety: ensure the viewport itself is at top
+    if (viewport) {
+      viewport.scrollTop = 0;
+    }
+  }
 
-.icon-button {
-  border: none;
-  background: radial-gradient(circle at top left, var(--accent-soft), transparent);
-  color: var(--text-main);
-  border-radius: 999px;
-  padding: 7px 9px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.35);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
-}
+  navItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const targetId = item.dataset.target;
+      if (!targetId) return;
 
-.icon-button.small {
-  padding: 4px 8px;
-  font-size: 1.1rem;
-}
+      setActivePage(targetId);
+      closeNav(); // overlay feels like opening a new screen
+    });
+  });
 
-.icon-button:hover {
-  transform: translateY(-1px) scale(1.03);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.9), 0 0 0 1px var(--accent-strong);
-  background: radial-gradient(circle at top left, var(--accent-soft), rgba(15, 23, 42, 0.95));
-}
+  /* ───────── Tabs (Booking & Finance) ───────── */
 
-.hamburger {
-  position: relative;
-  width: 20px;
-  height: 16px;
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+  const tabGroups = document.querySelectorAll("[data-tabs]");
 
-.hamburger span {
-  display: block;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(to right, #e0f2fe, var(--accent));
-}
+  tabGroups.forEach((group) => {
+    const page = group.closest(".page");
+    if (!page) return;
 
-/* ───────── Side nav + backdrop ───────── */
+    const buttons = group.querySelectorAll(".tab-button");
+    const panels = page.querySelectorAll(".tab-content");
 
-.side-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: min(260px, 80vw);
-  transform: translateX(-110%);
-  background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), #020617 65%);
-  box-shadow: 18px 0 60px rgba(15, 23, 42, 0.95);
-  padding: 14px 14px 20px;
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  transition: transform var(--transition-med);
-}
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetTab = btn.dataset.tab;
+        if (!targetTab) return;
 
-.side-nav.open {
-  transform: translateX(0);
-}
+        // Button states
+        buttons.forEach((b) => {
+          b.classList.toggle("active", b === btn);
+        });
 
-.side-nav-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
+        // Panel states
+        panels.forEach((panel) => {
+          const isMatch = panel.dataset.tabPanel === targetTab;
+          panel.classList.toggle("active", isMatch);
+        });
 
-.side-nav-title {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #94a3b8;
-}
+        // Reset page scroll when switching tab groups
+        page.scrollTop = 0;
+      });
+    });
+  });
 
-.side-nav-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+  /* ───────── PWA: service worker registration ───────── */
 
-.nav-item {
-  padding: 9px 11px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 0.92rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: #cbd5f5;
-  background: transparent;
-  box-shadow: 0 0 0 1px transparent;
-  position: relative;
-  transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
-}
-
-.nav-item::after {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: transparent;
-  box-shadow: 0 0 0 0 transparent;
-  transition: background var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.nav-item:hover {
-  background: radial-gradient(circle at left, rgba(30, 64, 175, 0.5), transparent);
-  transform: translateX(1px);
-}
-
-.nav-item.active {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9));
-  box-shadow: 0 0 0 1px var(--accent-strong), 0 12px 30px rgba(15, 23, 42, 0.9);
-  color: #e0f2fe;
-}
-
-.nav-item.active::after {
-  background: var(--accent);
-  box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
-}
-
-.backdrop {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.85), rgba(3, 7, 18, 0.95));
-  backdrop-filter: blur(8px);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 45;
-  transition: opacity var(--transition-med);
-}
-
-.backdrop.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* ───────── Tabs ───────── */
-
-.tabs {
-  display: inline-flex;
-  padding: 4px;
-  margin: 4px 4px 12px;
-  border-radius: 999px;
-  background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
-  box-shadow: 0 0 0 1px rgba(51, 65, 85, 0.9);
-}
-
-.tab-button {
-  border: none;
-  background: transparent;
-  border-radius: 999px;
-  padding: 6px 14px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
-}
-
-.tab-button:hover {
-  color: #e0f2fe;
-}
-
-.tab-button.active {
-  background: radial-gradient(circle at top, var(--accent-soft), rgba(15, 23, 42, 0.95));
-  color: #e0f2fe;
-  box-shadow: 0 0 0 1px var(--accent-strong), 0 10px 30px rgba(15, 23, 42, 0.9);
-  transform: translateY(-0.5px);
-}
-
-.tab-panels {
-  padding: 0 2px;
-}
-
-.tab-content {
-  display: none;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity var(--transition-med), transform var(--transition-med);
-}
-
-.tab-content.active {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("service-worker.js")
+      .catch((err) => {
+        console.warn("Service worker registration failed:", err);
+      });
+  }
+});
