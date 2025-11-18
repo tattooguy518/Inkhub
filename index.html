@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Studio Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#020617" />
+  <meta name="description" content="Studio hub PWA with booking, inspo, social, and finance." />
+
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Top bar -->
+    <header class="top-bar">
+      <button id="menuToggle" class="icon-button" aria-label="Open navigation">
+        <span class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+      <h1 class="app-title">Studio Hub</h1>
+    </header>
+
+    <!-- Side navigation -->
+    <nav id="sideNav" class="side-nav" aria-label="Main navigation">
+      <div class="side-nav-header">
+        <span class="side-nav-title">Navigation</span>
+        <button id="closeNav" class="icon-button small" aria-label="Close navigation">×</button>
+      </div>
+      <ul class="side-nav-list">
+        <li class="nav-item active" data-target="home">Home</li>
+        <li class="nav-item" data-target="booking">Booking</li>
+        <li class="nav-item" data-target="inspo">Inspo</li>
+        <li class="nav-item" data-target="social">Social</li>
+        <li class="nav-item" data-target="finance">Finance</li>
+      </ul>
+    </nav>
+
+    <!-- Backdrop for mobile nav -->
+    <div id="backdrop" class="backdrop"></div>
+
+    <!-- Main content -->
+    <main class="main">
+      <!-- HOME -->
+      <section id="home" class="page active" aria-label="Home">
+        <div class="page-header">
+          <h2>Home</h2>
+          <p class="page-subtitle">Quick overview of the day.</p>
+        </div>
+
+        <div class="card-grid">
+          <article class="card glow">
+            <h3>Today&apos;s Snapshot</h3>
+            <p>Placeholder for key metrics / summary.</p>
+          </article>
+
+          <article class="card">
+            <h3>Next Booking</h3>
+            <p>Quick glance at your upcoming appointment.</p>
+          </article>
+
+          <article class="card">
+            <h3>Inspo Spotlight</h3>
+            <p>Highlight a saved inspo piece here.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- BOOKING (tabs: Booking / Clients) -->
+      <section id="booking" class="page" aria-label="Booking">
+        <div class="page-header">
+          <h2>Booking</h2>
+          <p class="page-subtitle">Manage sessions and clients.</p>
+        </div>
+
+        <div class="tabs" data-tabs="booking">
+          <button class="tab-button active" data-tab="booking-main">Booking</button>
+          <button class="tab-button" data-tab="booking-clients">Clients</button>
+        </div>
+
+        <div class="tab-panels">
+          <div class="tab-content active" data-tab-panel="booking-main">
+            <div class="card-grid">
+              <article class="card glow">
+                <h3>Upcoming Sessions</h3>
+                <p>List or calendar of upcoming bookings.</p>
+              </article>
+
+              <article class="card">
+                <h3>New Booking</h3>
+                <p>Quick form / button to start a new booking.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="tab-content" data-tab-panel="booking-clients">
+            <div class="card-grid">
+              <article class="card glow">
+                <h3>Client List</h3>
+                <p>Searchable list of clients with basic info.</p>
+              </article>
+
+              <article class="card">
+                <h3>Client Notes</h3>
+                <p>Area for notes, preferences, and history.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INSPO -->
+      <section id="inspo" class="page" aria-label="Inspo">
+        <div class="page-header">
+          <h2>Inspo</h2>
+          <p class="page-subtitle">Ideas, reference art, and moodboards.</p>
+        </div>
+
+        <div class="card-grid">
+          <article class="card glow">
+            <h3>Inspo Vault</h3>
+            <p>Grid of saved references, tags, and notes.</p>
+          </article>
+
+          <article class="card">
+            <h3>Quick Ideas</h3>
+            <p>Drop in quick prompts / sketches to revisit later.</p>
+          </article>
+
+          <article class="card">
+            <h3>Collections</h3>
+            <p>Group inspo into themes (e.g., mushrooms, knights, florals).</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- SOCIAL -->
+      <section id="social" class="page" aria-label="Social">
+        <div class="page-header">
+          <h2>Social</h2>
+          <p class="page-subtitle">Content planning and social stats.</p>
+        </div>
+
+        <div class="card-grid">
+          <article class="card glow">
+            <h3>Post Queue</h3>
+            <p>See upcoming posts, captions, and platforms.</p>
+          </article>
+
+          <article class="card">
+            <h3>Engagement</h3>
+            <p>Track likes, saves, comments, and growth.</p>
+          </article>
+
+          <article class="card">
+            <h3>Ideas Drafts</h3>
+            <p>Dump captions, hooks, and thumbnail ideas.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- FINANCE (tabs: Income / Expense) -->
+      <section id="finance" class="page" aria-label="Finance">
+        <div class="page-header">
+          <h2>Finance</h2>
+          <p class="page-subtitle">Keep an eye on income and expenses.</p>
+        </div>
+
+        <div class="tabs" data-tabs="finance">
+          <button class="tab-button active" data-tab="income">Income</button>
+          <button class="tab-button" data-tab="expense">Expense</button>
+        </div>
+
+        <div class="tab-panels">
+          <div class="tab-content active" data-tab-panel="income">
+            <div class="card-grid">
+              <article class="card glow">
+                <h3>Income Overview</h3>
+                <p>Totals, charts, and breakdowns for income.</p>
+              </article>
+
+              <article class="card">
+                <h3>Recent Payments</h3>
+                <p>Latest paid bookings and methods.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="tab-content" data-tab-panel="expense">
+            <div class="card-grid">
+              <article class="card glow">
+                <h3>Expenses Overview</h3>
+                <p>Track supplies, rent, subscriptions, etc.</p>
+              </article>
+
+              <article class="card">
+                <h3>Add Expense</h3>
+                <p>Quick form/button for logging new expenses.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
