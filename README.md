@@ -1,19 +1,12 @@
-# Tattoo Studio Hub (PWA) – v3 (Full Structure)
+# Tattoo Studio Hub – v6 (theme + layout)
 
-This is the full-structure PWA with:
-- Home dashboard (next session, follow-ups, tasks, flash ideas, quick finance, timer)
-- Booking (create/edit/delete sessions + calendar view + Google Calendar links)
-- Clients (groups, notes, session history, spending, images, follow-up notifications)
-- Inspiration (idea paths with tiers, references, search/filter)
-- Social (post planning, captions, hashtags, calendar, inspo ideas)
-- Finance (income + expenses, searchable)
+Changes in this bundle:
 
-All data is stored locally via localStorage.
+- Replaced orange accents with an icy blue palette.
+- Buttons restyled to match the cooler theme.
+- Background gets subtle gradients and glows instead of a flat color.
+- Cards now have overflow hidden and a soft glow.
+- Form inputs slightly smaller; important fields use `.full-width` so 2-column layouts don't overlap.
+- Two-column form layout only activates from 768px width so most phones stay single-column.
 
-To run locally:
-
-```bash
-python -m http.server 8080
-```
-
-Then open `http://localhost:8080` and "Install" / "Add to Home screen" from your browser.
+Drop these into your existing repo (overwrite the old files), commit, and GitHub Pages will update your live site.

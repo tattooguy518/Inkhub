@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tattoo Studio Hub</title>
-
   <link rel="manifest" href="manifest.webmanifest" />
   <meta name="theme-color" content="#020617" />
-
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -27,17 +25,19 @@
     </nav>
 
     <main class="app-main">
-      <!-- Home Page -->
+      <!-- HOME -->
       <section id="page-home" class="page active">
         <section class="card card-accent">
           <h2>Next Session</h2>
-          <div id="homeNextSession" class="info-block small-text">No upcoming sessions.</div>
+          <div id="homeNextSession" class="info-block small-text">
+            No upcoming sessions.
+          </div>
         </section>
 
         <section class="card">
           <h2>Follow-ups</h2>
           <p class="small-text muted">
-            Shows follow-ups due today. If none, you'll see the next upcoming follow-up.
+            Auto 1-week and 1-month check-ins after each session.
           </p>
           <ul id="contactTodayList" class="list-simple small-text"></ul>
           <div id="nextFollowupInfo" class="small-text muted"></div>
@@ -63,7 +63,9 @@
             <button id="generateFlashBtn" class="btn-small">Generate 4 ideas</button>
           </div>
           <ul id="flashIdeasList" class="list-simple small-text"></ul>
-          <p class="small-text muted">Pinned sheets are saved into the Inspo page.</p>
+          <p class="small-text muted">
+            Pin a sheet to send it into the inspo vault.
+          </p>
         </section>
 
         <section class="card">
@@ -100,7 +102,7 @@
         </section>
       </section>
 
-      <!-- Tattoo Booking Page -->
+      <!-- BOOKING -->
       <section id="page-booking" class="page">
         <section class="card card-accent">
           <h2>New / Edit Tattoo Booking</h2>
@@ -134,20 +136,15 @@
               Deposit ($)
               <input type="number" id="bookingDeposit" min="0" step="1" />
             </label>
-            <label>
+            <label class="full-width">
               What's the tattoo?
-              <textarea id="bookingDescription" rows="3" placeholder="Skull with ferns, witchy forearm wrap, etc."></textarea>
+              <textarea id="bookingDescription" rows="3"
+                placeholder="Skull with ferns, witchy wrap, etc."></textarea>
             </label>
-            <label>
-              Reference Image
-              <input type="file" id="bookingImage" accept="image/*" />
-            </label>
-            <button type="submit" class="btn-primary">Save Booking</button>
-            <button type="button" id="cancelEditSessionBtn" class="btn-small secondary hidden">Cancel edit</button>
+            <button type="submit" class="btn-primary full-width">Save Booking</button>
+            <button type="button" id="cancelEditSessionBtn"
+              class="btn-small secondary hidden">Cancel edit</button>
           </form>
-          <p class="small-text muted">
-            Note: images + data are stored locally in your browser. Calendar sync uses a Google Calendar link; edits/deletes do not auto-update existing Google events.
-          </p>
         </section>
 
         <section class="card">
@@ -167,7 +164,7 @@
         </section>
       </section>
 
-      <!-- Client Management Page -->
+      <!-- CLIENTS -->
       <section id="page-clients" class="page">
         <section class="card">
           <h2>Clients</h2>
@@ -202,35 +199,26 @@
             <div><strong>Total Spend:</strong> $<span id="clientDetailTotalSpend">0</span></div>
           </div>
 
-          <button id="saveClientMetaBtn" class="btn-small" style="margin-top:0.5rem;">Save client info</button>
+          <button id="saveClientMetaBtn" class="btn-small" style="margin-top:0.5rem;">
+            Save client info
+          </button>
 
           <h3>Notes about them</h3>
-          <textarea id="clientNotesThem" rows="3" placeholder="Talking points, preferences, etc."></textarea>
+          <textarea id="clientNotesThem" rows="3"
+            placeholder="Talking points, preferences, etc."></textarea>
 
           <h3>Session notes</h3>
-          <textarea id="clientNotesSession" rows="4" placeholder="Prep, aftercare, next-time ideas..."></textarea>
+          <textarea id="clientNotesSession" rows="4"
+            placeholder="Prep, aftercare, next-time ideas..."></textarea>
 
           <button id="saveClientNotesBtn" class="btn-primary">Save Notes</button>
 
           <h3>Sessions</h3>
           <ul id="clientSessionsList" class="list-simple small-text"></ul>
-
-          <h3>Images</h3>
-          <p class="small-text muted">Includes reference images attached to bookings for this client.</p>
-          <div id="clientImagesGrid" class="inspo-grid"></div>
-        </section>
-
-        <section class="card">
-          <h2>Follow-up reminders</h2>
-          <p class="small-text muted">
-            The app can try to show browser notifications at 9am, 2pm, and 8pm while it's open.
-            Your browser / OS must allow notifications. This cannot guarantee alerts if the app is fully closed.
-          </p>
-          <button id="enableFollowupNotificationsBtn" class="btn-small">Enable reminders</button>
         </section>
       </section>
 
-      <!-- Drawing Inspiration Page -->
+      <!-- INSPO -->
       <section id="page-inspiration" class="page">
         <section class="card card-accent">
           <h2>New Idea Path</h2>
@@ -243,24 +231,24 @@
             <label>
               Tier
               <select id="inspoTier">
-                <option value="flash">Flash (small / quick)</option>
+                <option value="flash">Flash</option>
                 <option value="medium">Medium concept</option>
                 <option value="full">Full detailed concept</option>
               </select>
             </label>
-            <label>
+            <label class="full-width">
               Idea
-              <textarea id="inspoIdeaText" rows="4" placeholder="Describe the concept or generate one below."></textarea>
+              <textarea id="inspoIdeaText" rows="4"
+                placeholder="Describe the concept or generate one below."></textarea>
             </label>
-            <div class="inspo-idea-actions">
-              <button type="button" id="generateInspoIdeaBtn" class="btn-small">Generate idea</button>
+            <div class="inspo-idea-actions full-width">
+              <button type="button" id="generateInspoIdeaBtn" class="btn-small">
+                Generate idea
+              </button>
             </div>
-            <label>
-              References
-              <input type="file" id="inspoRefsInput" accept="image/*" multiple />
-            </label>
-            <button type="submit" class="btn-primary">Save idea</button>
-            <button type="button" id="cancelEditInspoBtn" class="btn-small secondary hidden">Cancel edit</button>
+            <button type="submit" class="btn-primary full-width">Save idea</button>
+            <button type="button" id="cancelEditInspoBtn"
+              class="btn-small secondary hidden">Cancel edit</button>
           </form>
         </section>
 
@@ -279,7 +267,7 @@
         </section>
       </section>
 
-      <!-- Social Media Planner Page -->
+      <!-- SOCIAL -->
       <section id="page-social" class="page">
         <section class="card">
           <h2>New Post Plan</h2>
@@ -298,35 +286,36 @@
               Target Date
               <input type="date" id="socialDate" />
             </label>
-            <label>
+            <label class="full-width">
               Concept / Piece
               <input type="text" id="socialConcept" placeholder="Healed sleeve, flash sheet, etc." />
             </label>
-            <label>
-              Caption Ideas
+            <label class="full-width">
+              Caption
               <textarea id="socialCaption" rows="3"></textarea>
               <div class="inspo-idea-actions">
                 <button type="button" id="generateCaptionBtn" class="btn-small">Generate caption</button>
-                <button type="button" id="improveCaptionBtn" class="btn-small secondary">Punch up caption</button>
+                <button type="button" id="improveCaptionBtn" class="btn-small secondary">
+                  Punch up caption
+                </button>
               </div>
             </label>
-            <label>
-              Hashtag Ideas
+            <label class="full-width">
+              Hashtags
               <textarea id="socialHashtags" rows="2" placeholder="#tattoo #blackwork ..."></textarea>
               <div class="inspo-idea-actions">
-                <button type="button" id="generateHashtagsBtn" class="btn-small secondary">Suggest hashtags</button>
+                <button type="button" id="generateHashtagsBtn" class="btn-small secondary">
+                  Suggest hashtags
+                </button>
               </div>
             </label>
-            <label>
-              Images for this post
-              <input type="file" id="socialImagesInput" accept="image/*" multiple />
-            </label>
-            <label>
+            <label class="full-width">
               Extra Notes
               <textarea id="socialNotes" rows="2"></textarea>
             </label>
-            <button type="submit" class="btn-primary">Save Plan</button>
-            <button type="button" id="cancelEditSocialBtn" class="btn-small secondary hidden">Cancel edit</button>
+            <button type="submit" class="btn-primary full-width">Save Plan</button>
+            <button type="button" id="cancelEditSocialBtn"
+              class="btn-small secondary hidden">Cancel edit</button>
           </form>
         </section>
 
@@ -365,7 +354,7 @@
         </section>
       </section>
 
-      <!-- Finance Page -->
+      <!-- FINANCE -->
       <section id="page-finance" class="page">
         <section class="card card-accent">
           <h2>Income</h2>
@@ -382,7 +371,7 @@
               Amount
               <input type="number" id="incomeAmount" min="0" step="0.01" required />
             </label>
-            <button type="submit" class="btn-primary">Add income</button>
+            <button type="submit" class="btn-primary full-width">Add income</button>
           </form>
           <div class="client-controls">
             <input id="incomeSearch" type="text" placeholder="Search income..." />
@@ -409,11 +398,7 @@
               Amount
               <input type="number" id="expenseAmount" min="0" step="0.01" required />
             </label>
-            <label>
-              Receipt / Image (optional)
-              <input type="file" id="expenseImage" accept="image/*" />
-            </label>
-            <button type="submit" class="btn-primary">Add expense</button>
+            <button type="submit" class="btn-primary full-width">Add expense</button>
           </form>
           <div class="client-controls">
             <input id="expenseSearch" type="text" placeholder="Search expenses..." />
