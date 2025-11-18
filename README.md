@@ -1,47 +1,50 @@
-# Tattoo Studio Hub (Full baseline build)
+# Tattoo Studio Hub – v5 PWA
 
-This is a complete, working PWA tailored for mobile:
+This is a mobile-first PWA for your tattoo studio:
 
 - Home:
   - Next upcoming session
-  - Auto follow-ups (1 week / 1 month) with list + next upcoming
-  - Message generator
-  - Tasks with checkboxes (saved)
-  - 4-idea flash generator
-  - Quick income/expense inputs
-  - Focus timer
+  - Auto follow-ups (1 week & 1 month after sessions)
+  - Message generator for client check-ins
+  - Tasks with checkboxes
+  - 4-piece flash idea generator + pin to inspo
+  - Quick income/expense capture
+  - Simple focus timer
 
 - Booking:
   - Create / edit / delete sessions
-  - "What's the tattoo?" field
-  - Upcoming sessions list
-  - Monthly calendar with highlighted days and day details
+  - Monthly calendar view with highlighted days
+  - “Google Calendar” button opens pre-filled event
 
 - Clients:
   - Auto-built from sessions
-  - Search and group filter
-  - Client groups (create)
-  - Client detail with last session, spend total, notes, and session history
+  - Groups, search, detail view
+  - Last session + total spend
+  - Notes about them & sessions
 
 - Inspo:
-  - Idea paths with name/tier/idea
+  - Idea paths with name, tier, idea text
   - Generator per tier
-  - Search, filter, edit, delete
+  - Search + filter + edit/delete
+  - Pinned flash sheets from Home appear here
 
 - Social:
-  - New post plans (platform/date/concept/caption/hashtags/notes)
-  - Caption/hashtag helpers
-  - Planned posts list with last summary
-  - Social calendar
-  - Social inspo generator and pinned ideas
+  - Plan posts (platform, date, concept, caption, hashtags, notes)
+  - Caption & hashtag suggestions
+  - Planned posts list
+  - Social calendar with color hints
+  - Social content idea generator + pin list
 
 - Finance:
-  - Income and expenses with search and delete
-  - All stored in localStorage
+  - Income log (searchable)
+  - Expense log (searchable)
 
-To use with GitHub Pages:
+All data stays in `localStorage` on the device/browser.
 
-1. Create a repo.
-2. Upload all files in this folder.
-3. Enable GitHub Pages on the repo (Pages → Source: main, root).
-4. Open the site on your phone and "Add to Home Screen" to install as a PWA.
+To run locally:
+
+```bash
+python -m http.server 8080
+```
+
+Then open `http://localhost:8080` and “Install / Add to Home screen”.

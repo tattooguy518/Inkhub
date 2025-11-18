@@ -19,7 +19,7 @@
       <button data-page="home" class="nav-btn active"><span>Home</span></button>
       <button data-page="booking" class="nav-btn"><span>Booking</span></button>
       <button data-page="clients" class="nav-btn"><span>Clients</span></button>
-      <button data-page="inspo" class="nav-btn"><span>Inspo</span></button>
+      <button data-page="inspiration" class="nav-btn"><span>Inspo</span></button>
       <button data-page="social" class="nav-btn"><span>Social</span></button>
       <button data-page="finance" class="nav-btn"><span>Finance</span></button>
     </nav>
@@ -37,7 +37,7 @@
         <section class="card">
           <h2>Follow-ups</h2>
           <p class="small-text muted">
-            Auto 1-week and 1-month follow-ups after each session.
+            Auto 1-week and 1-month check-ins after each session.
           </p>
           <ul id="contactTodayList" class="list-simple small-text"></ul>
           <div id="nextFollowupInfo" class="small-text muted"></div>
@@ -49,7 +49,7 @@
 
         <section class="card">
           <h2>Today's Tasks</h2>
-          <div class="inline-row">
+          <div class="todo-input-row">
             <input id="taskInput" type="text" placeholder="New task..." />
             <button id="addTaskBtn" class="btn-small">Add</button>
           </div>
@@ -58,11 +58,14 @@
 
         <section class="card">
           <h2>Quick Flash Ideas</h2>
-          <div class="inline-row">
+          <div class="todo-input-row">
             <input id="flashPromptInput" type="text" placeholder="Prompt for a 4-piece sheet..." />
             <button id="generateFlashBtn" class="btn-small">Generate 4 ideas</button>
           </div>
           <ul id="flashIdeasList" class="list-simple small-text"></ul>
+          <p class="small-text muted">
+            Pin a sheet to send it into the inspo vault.
+          </p>
         </section>
 
         <section class="card">
@@ -133,12 +136,12 @@
               Deposit ($)
               <input type="number" id="bookingDeposit" min="0" step="1" />
             </label>
-            <label class="full-width">
+            <label>
               What's the tattoo?
               <textarea id="bookingDescription" rows="3"
                 placeholder="Skull with ferns, witchy wrap, etc."></textarea>
             </label>
-            <button type="submit" class="btn-primary full-width">Save Booking</button>
+            <button type="submit" class="btn-primary">Save Booking</button>
             <button type="button" id="cancelEditSessionBtn"
               class="btn-small secondary hidden">Cancel edit</button>
           </form>
@@ -183,7 +186,7 @@
             <h2 id="clientDetailName">Client Detail</h2>
             <button id="deleteClientBtn" class="btn-small secondary">Delete client</button>
           </div>
-          <div class="small-text client-meta">
+          <div class="small-text">
             <div>
               <strong>Contact:</strong>
               <input id="clientDetailContact" type="text" />
@@ -196,7 +199,7 @@
             <div><strong>Total Spend:</strong> $<span id="clientDetailTotalSpend">0</span></div>
           </div>
 
-          <button id="saveClientMetaBtn" class="btn-small">
+          <button id="saveClientMetaBtn" class="btn-small" style="margin-top:0.5rem;">
             Save client info
           </button>
 
@@ -216,7 +219,7 @@
       </section>
 
       <!-- INSPO -->
-      <section id="page-inspo" class="page">
+      <section id="page-inspiration" class="page">
         <section class="card card-accent">
           <h2>New Idea Path</h2>
           <form id="inspoIdeaForm" class="form-grid">
@@ -233,17 +236,17 @@
                 <option value="full">Full detailed concept</option>
               </select>
             </label>
-            <label class="full-width">
+            <label>
               Idea
               <textarea id="inspoIdeaText" rows="4"
                 placeholder="Describe the concept or generate one below."></textarea>
             </label>
-            <div class="full-width">
+            <div class="inspo-idea-actions">
               <button type="button" id="generateInspoIdeaBtn" class="btn-small">
                 Generate idea
               </button>
             </div>
-            <button type="submit" class="btn-primary full-width">Save idea</button>
+            <button type="submit" class="btn-primary">Save idea</button>
             <button type="button" id="cancelEditInspoBtn"
               class="btn-small secondary hidden">Cancel edit</button>
           </form>
@@ -283,34 +286,34 @@
               Target Date
               <input type="date" id="socialDate" />
             </label>
-            <label class="full-width">
+            <label>
               Concept / Piece
               <input type="text" id="socialConcept" placeholder="Healed sleeve, flash sheet, etc." />
             </label>
-            <label class="full-width">
+            <label>
               Caption
               <textarea id="socialCaption" rows="3"></textarea>
-              <div class="inline-row">
-                <button type="button" id="generateCaptionBtn" class="btn-small">Generate</button>
+              <div class="inspo-idea-actions">
+                <button type="button" id="generateCaptionBtn" class="btn-small">Generate caption</button>
                 <button type="button" id="improveCaptionBtn" class="btn-small secondary">
-                  Punch up
+                  Punch up caption
                 </button>
               </div>
             </label>
-            <label class="full-width">
+            <label>
               Hashtags
               <textarea id="socialHashtags" rows="2" placeholder="#tattoo #blackwork ..."></textarea>
-              <div>
+              <div class="inspo-idea-actions">
                 <button type="button" id="generateHashtagsBtn" class="btn-small secondary">
                   Suggest hashtags
                 </button>
               </div>
             </label>
-            <label class="full-width">
+            <label>
               Extra Notes
               <textarea id="socialNotes" rows="2"></textarea>
             </label>
-            <button type="submit" class="btn-primary full-width">Save Plan</button>
+            <button type="submit" class="btn-primary">Save Plan</button>
             <button type="button" id="cancelEditSocialBtn"
               class="btn-small secondary hidden">Cancel edit</button>
           </form>
@@ -368,7 +371,7 @@
               Amount
               <input type="number" id="incomeAmount" min="0" step="0.01" required />
             </label>
-            <button type="submit" class="btn-primary full-width">Add income</button>
+            <button type="submit" class="btn-primary">Add income</button>
           </form>
           <div class="client-controls">
             <input id="incomeSearch" type="text" placeholder="Search income..." />
@@ -395,7 +398,7 @@
               Amount
               <input type="number" id="expenseAmount" min="0" step="0.01" required />
             </label>
-            <button type="submit" class="btn-primary full-width">Add expense</button>
+            <button type="submit" class="btn-primary">Add expense</button>
           </form>
           <div class="client-controls">
             <input id="expenseSearch" type="text" placeholder="Search expenses..." />
