@@ -223,17 +223,31 @@ body {
 /* Pages */
 
 .page {
+  display: none;           /* 🚨 hide non-active pages from layout */
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
-  transition: opacity var(--transition-med), transform var(--transition-med);
 }
 
 .page.active {
+  display: block;          /* only the active page takes up space */
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  animation: pageFadeIn 0.22s ease-out;
 }
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 .page-header {
   margin-bottom: 12px;
