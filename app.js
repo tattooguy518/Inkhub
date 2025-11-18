@@ -23,14 +23,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function setActivePage(targetId) {
-    pages.forEach((page) => {
-      page.classList.toggle("active", page.id === targetId);
-    });
+  // Switch visible page
+  pages.forEach((page) => {
+    page.classList.toggle("active", page.id === targetId);
+  });
 
-    navItems.forEach((item) => {
-      item.classList.toggle("active", item.dataset.target === targetId);
-    });
-  }
+  // Update nav highlight
+  navItems.forEach((item) => {
+    item.classList.toggle("active", item.dataset.target === targetId);
+  });
+
+  // 🔹 Reset scroll so the new page starts at the top
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"   // change to "auto" if you want it instant
+  });
+}
 
   /* Event wiring */
 
